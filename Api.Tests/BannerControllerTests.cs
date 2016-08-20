@@ -142,7 +142,6 @@ namespace Api.Tests
             var html = (response as HtmlResult).ExecuteAsync(new System.Threading.CancellationToken()).Result;
             var contentType = html.Content.Headers.ContentType;
             Assert.True(contentType.ToString().Contains("text/html"));
-
         }
     }
 }

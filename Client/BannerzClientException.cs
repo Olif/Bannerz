@@ -1,6 +1,4 @@
-﻿using System;
-using System.Runtime.Serialization;
-using System.Web;
+﻿using System.Web;
 
 namespace Client
 {
@@ -12,7 +10,6 @@ namespace Client
 
         public BannerzClientException(string message)
         {
-
         }
 
         public BannerzClientException(int httpCode, string message) : base(httpCode, message)
