@@ -1,10 +1,5 @@
 ﻿using Api.Domain;
 using Api.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -73,7 +68,6 @@ namespace Api.Controllers
             {
                 return BadRequest(string.Join("\n", validationResult.ErrorMessages));
             }
-
         }
 
         [HttpDelete]
@@ -90,6 +84,11 @@ namespace Api.Controllers
             return Ok(banner);
         }
 
+        /// <summary>
+        /// Returns a banners html as body and content-type set to text/html
+        /// </summary>
+        /// <param name="id">The banner id</param>
+        /// <returns>A html string</returns>
         [HttpGet]
         [Route("banner/{id}")]
         public IHttpActionResult RenderBannerHtml(int id)
