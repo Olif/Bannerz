@@ -19,7 +19,7 @@ namespace Client.Tests
                                     <title>Hello</title>
                                 </head>
                                 <body>
-                                    <p>Hello Crille Lampa/p>
+                                    <p>Hello Crille Lampa</p>
                                 </body>
                             </html>"
             };
