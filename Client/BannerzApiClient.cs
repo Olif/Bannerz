@@ -1,7 +1,9 @@
 ﻿using Domain;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,13 +12,13 @@ namespace Client
 {
     public interface IBannerzApiClient
     {
-        BannerDTO GetAsync(int id);
+        Task<BannerDTO> GetAsync(int id);
 
-        BannerDTO PostAsync(BannerDTO banner);
+        Task<BannerDTO> CreateAsync(BannerDTO banner);
 
-        BannerDTO PutAsync(int id, BannerDTO banner);
+        Task<BannerDTO> UpdateAsync(int id, BannerDTO banner);
 
-        BannerDTO DeleteAsync(int id);
+        Task<BannerDTO> DeleteAsync(int id);
     }
 
     public class BannerzApiClient : IBannerzApiClient
@@ -29,24 +31,52 @@ namespace Client
             _client.BaseAddress = new Uri(baseUrl);
         }
 
-        BannerDTO IBannerzApiClient.DeleteAsync(int id)
+        public async Task<BannerDTO> DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var path = $"api/v1/banners/{id}";
+            var response = await _client.DeleteAsync(path);
+            return await HandleResponse(response);
         }
 
-        BannerDTO IBannerzApiClient.GetAsync(int id)
+        public async Task<BannerDTO> GetAsync(int id)
         {
-            throw new NotImplementedException();
+            var path = $"api/v1/banners/{id}";
+            var response = await _client.GetAsync(path);
+            return await HandleResponse(response);
         }
 
-        BannerDTO IBannerzApiClient.PostAsync(BannerDTO banner)
+        public async Task<BannerDTO> CreateAsync(BannerDTO banner)
         {
-            throw new NotImplementedException();
+            var path = $"api/v1/banners";
+            StringContent content = CreateJsonContent(banner);
+            var response = await _client.PostAsync(path, content);
+            return await HandleResponse(response);
         }
 
-        BannerDTO IBannerzApiClient.PutAsync(int id, BannerDTO banner)
+        public async Task<BannerDTO> UpdateAsync(int id, BannerDTO banner)
         {
-            throw new NotImplementedException();
+            var path = $"api/v1/banners/{id}";
+            var content = CreateJsonContent(banner);
+            var response = await _client.PutAsync(path, content);
+            return await HandleResponse(response);
+        }
+
+        private static StringContent CreateJsonContent(BannerDTO banner)
+        {
+            var json = JsonConvert.SerializeObject(banner);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            return content;
+        }
+
+        private static async Task<BannerDTO> HandleResponse(HttpResponseMessage response)
+        {
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                var errorMsg = await response.Content.ReadAsStringAsync();
+                throw new BannerzClientException((int)response.StatusCode, errorMsg);
+            }
+            var json = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<BannerDTO>(json);
         }
     }
 }

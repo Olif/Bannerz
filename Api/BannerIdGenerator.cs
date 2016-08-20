@@ -13,7 +13,8 @@ namespace Api
 
         public int Next()
         {
-            return _repo.NextSequence();
+            // Let the minimum id be 1 
+            return _repo.NextSequence() + 1;
         }
     }
 }

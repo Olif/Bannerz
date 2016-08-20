@@ -4,6 +4,7 @@ using System.Web.Http;
 
 namespace Api.Controllers
 {
+    [RoutePrefix("api/v1/banners")]
     public class BannerController : ApiController
     {
         private readonly IBannerRepository _bannerRepository;
@@ -17,8 +18,7 @@ namespace Api.Controllers
             _idGenerator = idGenerator;
         }
 
-        [HttpGet]
-        [Route("api/banners/{id:int}")]
+        [Route("{id:int}")]
         public IHttpActionResult Get(int id)
         {
             var banner = _bannerRepository.Find(id);
@@ -30,8 +30,7 @@ namespace Api.Controllers
             return Ok(banner);
         }
 
-        [HttpPost]
-        [Route("api/banners")]
+        [Route("")]
         public async Task<IHttpActionResult> Post(BannerDTO bannerModel)
         {
             var validationResult = await _htmlValidator.ValidateAsync(bannerModel.Html);
@@ -47,8 +46,7 @@ namespace Api.Controllers
             }
         }
 
-        [HttpPut]
-        [Route("api/banners/{id:int}")]
+        [Route("{id:int}")]
         public async Task<IHttpActionResult> Put(int id, BannerDTO bannerModel)
         {
             var banner = _bannerRepository.Find(id);
@@ -69,8 +67,7 @@ namespace Api.Controllers
             }
         }
 
-        [HttpDelete]
-        [Route("api/banners/{id:int}")]
+        [Route("{id:int}")]
         public IHttpActionResult Delete(int id)
         {
             var banner = _bannerRepository.Find(id);
@@ -89,11 +86,11 @@ namespace Api.Controllers
         /// <param name="id">The banner id</param>
         /// <returns>A html string</returns>
         [HttpGet]
-        [Route("banner/{id}")]
+        [Route("~/banners/{id:int}")]
         public IHttpActionResult RenderBannerHtml(int id)
         {
             var banner = _bannerRepository.Find(id);
-            if(banner == null)
+            if (banner == null)
             {
                 return NotFound();
             }
