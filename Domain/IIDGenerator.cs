@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Api.Domain
+namespace Domain
 {
     public interface IIdGenerator
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Api.Domain
+namespace Domain
 {
     public class Banner
     {

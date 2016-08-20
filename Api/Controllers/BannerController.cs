@@ -1,5 +1,4 @@
-﻿using Api.Domain;
-using Api.Models;
+﻿using Domain;
 using System.Threading.Tasks;
 using System.Web.Http;
 

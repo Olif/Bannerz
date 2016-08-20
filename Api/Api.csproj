@@ -94,21 +94,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="BannerIdGenerator.cs" />
     <Compile Include="Controllers\BannerController.cs" />
-    <Compile Include="Domain\Banner.cs" />
-    <Compile Include="Domain\BannerIdGenerator.cs" />
-    <Compile Include="Domain\HtmlValidationResult.cs" />
-    <Compile Include="Domain\IBannerRepository.cs" />
-    <Compile Include="Domain\IHtmlValidator.cs" />
-    <Compile Include="Domain\IIdGenerator.cs" />
-    <Compile Include="Domain\InMemoryBannerRepository.cs" />
-    <Compile Include="Domain\W3CHtmlValidator.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="HtmlResult.cs" />
-    <Compile Include="Models\BannerDTO.cs" />
+    <Compile Include="InMemoryBannerRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="W3CHtmlValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -121,6 +115,13 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{ee8ce3ee-cb9c-4fde-a5ce-725c8822f5b0}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

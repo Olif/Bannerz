@@ -1,13 +1,13 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Domain;
+using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace Api.Domain
+namespace Api
 {
     public class W3CHtmlValidator : IHtmlValidator
     {

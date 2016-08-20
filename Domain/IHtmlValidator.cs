@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Api.Domain
+namespace Domain
 {
     public interface IHtmlValidator
     {
