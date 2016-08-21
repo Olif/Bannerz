@@ -9,6 +9,9 @@ using System.Web;
 
 namespace Api
 {
+    /// <summary>
+    /// Validates html by using w3c:s html validator
+    /// </summary>
     public class W3CHtmlValidator : IHtmlValidator
     {
         private static Uri baseUri = new Uri("https://validator.w3.org/nu/");
